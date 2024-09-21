@@ -11,7 +11,7 @@ class train_config:
     enable_fsdp: bool=False # shards model parameters, optimizer states and gradients across DDP ranks
     low_cpu_fsdp: bool=False # saves cpu memory by loading pretrained model on rank0 only
     run_validation: bool=True
-    batch_size_training: int=8
+    batch_size_training: int=16
     batching_strategy: str="padding" #alternative: padding
     context_length: int=1024
     gradient_accumulation_steps: int=1

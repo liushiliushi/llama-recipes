@@ -29,10 +29,10 @@ def extract_answer(completion):
 def get_gsm8k_dataset(tokenizer, split):
     if split == 'train':
         path = '/home/lyb/workspace/llm-uncertainty/dataset/grade_school_math/data/train.jsonl'
-        dataset = datasets.load_dataset('json', data_files=path, split='train[:10]')
+        dataset = datasets.load_dataset('json', data_files=path, split='train')
     else:
         path = '/home/lyb/workspace/llm-uncertainty/dataset/grade_school_math/data/test.jsonl'
-        dataset = datasets.load_dataset('json', data_files=path, split='train[:10]')
+        dataset = datasets.load_dataset('json', data_files=path, split='train')
 
 
     def apply_prompt_template(sample):

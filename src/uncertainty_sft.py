@@ -10,7 +10,7 @@ import fire
 import random
 import torch
 import torch.optim as optim
-from peft import get_peft_model, PeftModel
+from peft import get_peft_model, PeftModel, AutoPeftModelForCausalLM
 from torch.distributed.fsdp import (
     FullyShardedDataParallel as FSDP,
     ShardingStrategy
@@ -132,6 +132,8 @@ def main(**kwargs):
         torch_dtype=torch.float16 if train_config.use_fp16 else torch.bfloat16,
     )
 
+    # model = AutoPeftModelForCausalLM.from_pretrained("checkpoints0921")
+
     # Load the tokenizer and add special tokens
     tokenizer = AutoTokenizer.from_pretrained(
         train_config.model_name if train_config.tokenizer_name is None else train_config.tokenizer_name)
@@ -153,7 +155,7 @@ def main(**kwargs):
         # Load the pre-trained peft model checkpoint and setup its configuration
         if train_config.from_peft_checkpoint:
             model = PeftModel.from_pretrained(model, train_config.from_peft_checkpoint, is_trainable=True)
-            peft_config = model.peft_config()
+            peft_config = model.peft_config
         # Generate the peft config and start fine-tuning from original model
         else:
             peft_config = generate_peft_config(train_config, kwargs)
