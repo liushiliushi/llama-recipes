@@ -11,7 +11,7 @@ class train_config:
     enable_fsdp: bool=False # shards model parameters, optimizer states and gradients across DDP ranks
     low_cpu_fsdp: bool=False # saves cpu memory by loading pretrained model on rank0 only
     run_validation: bool=True
-    batch_size_training: int=16
+    batch_size_training: int=8
     batching_strategy: str="padding" #alternative: padding
     context_length: int=1024
     gradient_accumulation_steps: int=1
@@ -27,7 +27,7 @@ class train_config:
     seed: int=42
     use_fp16: bool=False
     mixed_precision: bool=True
-    val_batch_size: int=16
+    val_batch_size: int=8
     dataset = "gsm8k_dataset"
     peft_method: str = "lora" # None, llama_adapter (Caution: llama_adapter is currently not supported with FSDP)
     use_peft: bool=False # use parameter efficient fine tuning
